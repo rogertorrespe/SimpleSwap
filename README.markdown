@@ -1,46 +1,44 @@
-# SimpleSwap Contract
+# SimpleSwap - Trabajo Final Módulo 3
 
 ## Descripción
+Este repositorio contiene la implementación del contrato `SimpleSwap`, que replica funcionalidades de Uniswap V2 para un par de tokens ERC-20, cumpliendo con los requerimientos del Módulo 3 del curso de Ethereum.
 
-`SimpleSwap` es un contrato inteligente que implementa un Automated Market Maker simplificado, inspirado en Uniswap V2, para un par de tokens ERC-20 en la red de prueba Sepolia. Utiliza la fórmula de producto constante (`x * y = k`) con una tarifa del 0.3% para los intercambios. El contrato permite añadir y remover liquidez, realizar swaps, y consultar precios, y está diseñado para ser autónomo, sin dependencias externas.
+## Contratos desplegados
+- **SimpleSwap**: `0x651bA2cF45eC284b6cFFB88b60D50d87573e6151` 
+- **Token A**: `0x41eDC1589e1F83fbb5E91260975f47EE38F2d7dD` 
+- **Token B**: `0x873f9FebC0B9960F2a808a88491233f20128481e` 
 
-### Características
-- **Añadir Liquidez**: Permite a los usuarios agregar liquidez al pool y recibir tokens de liquidez.
-- **Remover Liquidez**: Permite retirar liquidez y recibir tokens proporcionales.
-- **Swap**: Intercambia tokens con una tarifa del 0.3%.
-- **Consultar Precio**: Calcula el precio de un token en términos del otro.
-- **Seguridad**: Incluye protección contra ataques de dust (`MINIMUM_LIQUIDITY`) y verificaciones de plazos.
-
-## Requisitos
-- Acceso a [Remix IDE](https://remix.ethereum.org).
-- Una billetera como MetaMask configurada para la red Sepolia.
-- ETH de prueba en Sepolia (obtén ETH en un faucet como https://sepoliafaucet.com).
-- Direcciones de dos tokens ERC-20 en Sepolia para el par de tokens.
-
-## Compilación en Remix
-1. Abre [Remix IDE](https://remix.ethereum.org).
-2. Crea un nuevo archivo llamado `SimpleSwap.sol` en la carpeta `contracts`.
-3. Copia y pega el contenido de `contracts/SimpleSwap.sol` desde este repositorio.
-4. Ve a la pestaña **Solidity Compiler**:
-   - Selecciona la versión del compilador `0.8.30`.
-   - Desactiva la optimización.
-5. Haz clic en **Compile SimpleSwap.sol**.
-
-## Despliegue en Sepolia
-1. En Remix, ve a la pestaña **Deploy & Run Transactions**.
-2. Selecciona **Injected Provider - MetaMask** y conéctalo a la red Sepolia.
-3. En el campo **Contract**, selecciona `SimpleSwap`.
-4. Ingresa los argumentos del constructor:
-   - `_tokenA`: `0x25bc9cadc44d6888f80fb94498bac65b77a678a3`
-   - `_tokenB`: `0xe1da96532ed61c55d0abbcf03e676e02eb543e2d`
-5. Haz clic en **Deploy**.
-6. Confirma la transacción en MetaMask.
-
-## Verificación en Etherscan
-El contrato ya está verificado en Sepolia:
-- **Contract Address**: [0xFBD9f5e73AD67b15703ff6c676a4f4dD24Df7A3A](https://sepolia.etherscan.io/address/0xFBD9f5e73AD67b15703ff6c676a4f4dD24Df7A3A)
+NuevoTokenA NTA : 0x41eDC1589e1F83fbb5E91260975f47EE38F2d7dD
+NuevoTokenB NTB : 0x873f9FebC0B9960F2a808a88491233f20128481e
+NUEVOSIMPLESWAP: 0x651bA2cF45eC284b6cFFB88b60D50d87573e6151
 
 
-## Repositorio
-- **URL**: [https://github.com/rogertorrespe/SimpleSwap](https://github.com/rogertorrespe/SimpleSwap)
+## Instrucciones de despliegue
+1. **Desplegar tokens ERC-20**:
+   - Usé `TestToken.sol` en Remix para desplegar `Token A` (nombre: "NuevoTokenA", símbolo: "NTA") y `Token B` (nombre: "NuevoTokenB", símbolo: "NTB") en Sepolia.
+   - Cada token mintea 1M tokens (18 decimales) al desplegador.
 
+2. **Desplegar SimpleSwap**:
+   - Desplegué `SimpleSwap.sol` en Sepolia usando Remix, pasando las direcciones de `Token A` y `Token B` al constructor.
+
+3. **Configuración**:
+   - Aprobé 1M tokens de `Token A` y `Token B` para `SimpleSwap` usando `approve`.
+   - Transferí 10K tokens de cada uno al contrato verificador (`0x9f8f02dab384dddf1591c3366069da3fb0018220`) y aprobé 10K tokens para el verificador.
+
+4. **Verificación**:
+   - Cargué `SwapVerifier.sol` en Remix en `0x9f8f02dab384dddf1591c3366069da3fb0018220`.
+   - Llamé a `verify` con:
+     ```
+     NUEVOSIMPLESWAP: 0x651bA2cF45eC284b6cFFB88b60D50d87573e6151, 0x41eDC1589e1F83fbb5E91260975f47EE38F2d7dD, 0x873f9FebC0B9960F2a808a88491233f20128481e, 1000000000000000000000, 1000000000000000000000, 100000000000000000000, "Paul Roger Torres Silva"
+     ```
+   - Transacción: [Enlace a Etherscan](#).
+
+## Archivos
+- `SimpleSwap.sol`: Contrato principal con optimizaciones de gas.
+- `TestToken.sol`: Contrato ERC-20 para los tokens.
+- `SwapVerifier.sol`: Contrato verificador (referencia).
+
+## Notas
+- Redeplegué nuevos contratos, diferentes a la primera entrega.
+- El contrato `SimpleSwap` usa `unchecked` para optimizar gas.
+- Los comentarios están en inglés como se ha solicitado.
