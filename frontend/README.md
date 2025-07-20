@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# SimpleSwap DApp - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción del Proyecto
 
-## Available Scripts
+SimpleSwap es una aplicación descentralizada (DApp) que permite a los usuarios intercambiar tokens ERC-20 (NTA y NTB) en la red Sepolia de Ethereum, gestionar liquidez en un pool de intercambio, y visualizar precios en tiempo real. El frontend, desarrollado con Next.js, proporciona una interfaz intuitiva para interactuar con el contrato `SimpleSwap` y los tokens `NuevoTokenA` (NTA) y `NuevoTokenB` (NTB).
 
-In the project directory, you can run:
+Este proyecto forma parte del Trabajo Práctico del Módulo 4, demostrando la integración de contratos inteligentes con un frontend moderno y el despliegue en Vercel para acceso público.
 
-### `npm start`
+## Contratos Desplegados
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Red**: Sepolia (Chain ID: 11155111)
+- **SimpleSwap**: `0x651bA2cF45eC284b6cFFB88b60D50d87573e6151`
+- **NuevoTokenA (NTA)**: `0x41eDC1589e1F83fbb5E91260975f47EE38F2d7dD`
+- **NuevoTokenB (NTB)**: `0x873f9FebC0B9960F2a808a88491233f20128481e`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Requisitos Previos
 
-### `npm test`
+- **Node.js**: Versión 20.19.0 o superior (`nvm install 20.19.0`).
+- **MetaMask**: Configurado para la red Sepolia con Sepolia ETH y tokens NTA/NTB.
+- **Vercel CLI**: Para despliegue (`npm install -g vercel`).
+- **Hardhat**: Para pruebas y scripts de interacción con contratos (`npm install --save-dev hardhat`).
+- **Dependencias del Frontend**: Instalar con `npm install` en el directorio `frontend`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instalación y Ejecución
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Clonar el Repositorio**:
+   ```bash
+   git clone https://github.com/rogertorrespe/SimpleSwap
+   cd SimpleSwap/frontend
