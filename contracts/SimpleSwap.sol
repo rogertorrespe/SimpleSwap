@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
 /// @title IERC20
 /// @notice Minimal interface for ERC-20 tokens used in SimpleSwap
