@@ -1,67 +1,37 @@
-// frontend/src/components/WalletConnector.js
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ethers } from "ethers";
-import { config } from "../config";
 
 export default function WalletConnector({ setProvider, setSigner, setAccount }) {
-  const [connected, setConnected] = useState(false);
-  const [account, setLocalAccount] = useState(""); // Local state for account
+  const [account, setLocalAccount] = useState(null);
   const [error, setError] = useState("");
 
   const connectWallet = async () => {
+    setError("");
     try {
-      if (window.ethereum) {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = await provider.getSigner();
-        const accountAddress = await signer.getAddress();
-        const network = await provider.getNetwork();
-
-        if (Number(network.chainId) !== config.network.chainId) {
-          try {
-            await window.ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [{ chainId: `0x${config.network.chainId.toString(16)}` }],
-            });
-          } catch (switchError) {
-            setError("Por favor, cambia a la red Sepolia en MetaMask.");
-            return;
-          }
-        }
-
-        setProvider(provider);
-        setSigner(signer);
-        setAccount(accountAddress); // Update parent state
-        setLocalAccount(accountAddress); // Update local state
-        setConnected(true);
-        setError("");
-      } else {
+      if (!window.ethereum) {
         setError("Por favor, instala MetaMask.");
+        return;
       }
+      const web3Provider = new ethers.BrowserProvider(window.ethereum);
+      const accounts = await web3Provider.send("eth_requestAccounts", []);
+      const signer = await web3Provider.getSigner();
+      setProvider(web3Provider);
+      setSigner(signer);
+      setAccount(accounts[0]);
+      setLocalAccount(accounts[0]);
     } catch (err) {
       setError("Error al conectar la billetera: " + err.message);
     }
   };
 
-  useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", () => window.location.reload());
-      window.ethereum.on("chainChanged", () => window.location.reload());
-    }
-  }, []);
-
   return (
     <div className="p-4">
-      {connected ? (
-        <p className="text-green-500">Conectado: {account}</p>
-      ) : (
-        <button
-          onClick={connectWallet}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Conectar MetaMask
-        </button>
-      )}
+      <button
+        onClick={connectWallet}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        {account ? `Conectado: ${account.slice(0, 6)}...${account.slice(-4)}` : "Conectar Billetera"}
+      </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );

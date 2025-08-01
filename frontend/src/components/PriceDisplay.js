@@ -1,4 +1,3 @@
-// frontend/src/components/PriceDisplay.js
 import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 import { config } from "../config";
@@ -6,7 +5,6 @@ import SimpleSwapABI from "../abis/contracts/SimpleSwap.sol/SimpleSwap.json";
 
 export default function PriceDisplay({ provider }) {
   const [price, setPrice] = useState({ ntaToNtb: 0, ntbToNta: 0 });
-  const [error, setError] = useState("");
 
   const simpleSwapContract = new ethers.Contract(
     config.contracts.simpleSwap,
@@ -29,7 +27,7 @@ export default function PriceDisplay({ provider }) {
         ntbToNta: ethers.formatUnits(ntbToNta, 18),
       });
     } catch (err) {
-      //setError("Error al obtener precios: " + err.message);
+      console.error("Error al obtener precios: ", err.message);
     }
   }, [simpleSwapContract, config.contracts.tokenA, config.contracts.tokenB]);
 
@@ -46,7 +44,6 @@ export default function PriceDisplay({ provider }) {
       <h2 className="text-2xl mb-4">Precios en Tiempo Real</h2>
       <p>1 NTA = {price.ntaToNtb} NTB</p>
       <p>1 NTB = {price.ntbToNta} NTA</p>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 }

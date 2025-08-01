@@ -10,4 +10,6 @@ export const config = {
     tokenA: "0x41eDC1589e1F83fbb5E91260975f47EE38F2d7dD",
     tokenB: "0x873f9FebC0B9960F2a808a88491233f20128481e",
   },
+  infuraUrl: `https://sepolia.infura.io/v3/${process.env.REACT_APP_INFURA_API_KEY}`
+
 };

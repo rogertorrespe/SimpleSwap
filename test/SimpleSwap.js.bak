@@ -1,0 +1,44 @@
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+
+describe("SimpleSwap", function () {
+  let simpleSwap;
+  let tokenA;
+  let tokenB;
+  let owner;
+  let addr1;
+
+  beforeEach(async function () {
+    [owner, addr1] = await ethers.getSigners();
+
+    // Desplegar tokens
+    const Token = await ethers.getContractFactory("TestToken");
+    tokenA = await Token.deploy("Token A", "TKA");
+    tokenB = await Token.deploy("Token B", "TKB");
+
+    // Desplegar SimpleSwap
+    const SimpleSwap = await ethers.getContractFactory("SimpleSwap");
+    simpleSwap = await SimpleSwap.deploy(tokenA.target, tokenB.target);
+
+    // Mint tokens
+    await tokenA.mint(owner.address, ethers.parseEther("1000"));
+    await tokenB.mint(owner.address, ethers.parseEther("1000"));
+  });
+it("should revert if deadline passed", async function () {
+  const expiredDeadline = Math.floor(Date.now() / 1000) - 1;
+  await expect(
+    simpleSwap.addLiquidity(
+      tokenA.target,
+      tokenB.target,
+      ethers.parseEther("100"),
+      ethers.parseEther("100"),
+      0,
+      0,
+      owner.address,
+      expiredDeadline
+    )
+  ).to.be.revertedWith("SS: EXP");
+});
+
+});

@@ -1,35 +1,27 @@
 {
   "name": "simpleswap",
   "version": "1.0.0",
-  "description": "Este repositorio contiene la implementación del contrato `SimpleSwap`, que replica funcionalidades de Uniswap V2 para un par de tokens ERC-20, cumpliendo con los requerimientos del Módulo 3 del curso de Ethereum.",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx hardhat test",
+    "coverage": "npx hardhat coverage"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rogertorrespe/SimpleSwap.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/rogertorrespe/SimpleSwap/issues"
-  },
-  "homepage": "https://github.com/rogertorrespe/SimpleSwap#readme",
   "devDependencies": {
-    "@openzeppelin/contracts": "^5.4.0",
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "dotenv": "^17.2.0",
-    "hardhat": "^2.26.0"
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.7",
+    "@nomicfoundation/hardhat-ethers": "^3.1.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@typechain/ethers-v6": "^0.4.0",
+    "@typechain/hardhat": "^8.0.0",
+    "chai": "^4.3.7",
+    "ethers": "^6.15.0",
+    "hardhat": "^2.26.1",
+    "hardhat-gas-reporter": "^1.0.10",
+    "solidity-coverage": "^0.8.16",
+    "ts-node": "^10.9.1",
+    "typechain": "^8.2.0",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "dotenv": "^17.2.0",
-    "micro-eth-signer": "0.15.0"
-  },
-  "directories": {
-    "test": "test"
+    "@openzeppelin/contracts": "^4.9.6"
   }
 }

@@ -1,11 +1,10 @@
-// frontend/src/components/SwapPanel.js
 import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 import { config } from "../config";
 import SimpleSwapABI from "../abis/contracts/SimpleSwap.sol/SimpleSwap.json";
 import TestTokenABI from "../abis/contracts/TestToken.sol/TestToken.json";
 
-export default function SwapPanel({ provider, signer, account }) {
+export default function SwapPanel({ signer, account }) {
   const [amountIn, setAmountIn] = useState("");
   const [amountOut, setAmountOut] = useState("");
   const [tokenIn, setTokenIn] = useState(config.contracts.tokenA);
@@ -43,7 +42,7 @@ export default function SwapPanel({ provider, signer, account }) {
     } catch (err) {
       setError("Error al calcular el monto de salida: " + err.message);
     }
-  }, [amountIn, signer, tokenIn, simpleSwapContract, config.contracts.tokenA]);
+  }, [amountIn, tokenIn, signer, simpleSwapContract, config.contracts.tokenA, config.contracts.tokenB]);
 
   const approveToken = async () => {
     setError("");
@@ -72,7 +71,7 @@ export default function SwapPanel({ provider, signer, account }) {
       if (!approved) return;
 
       const amountInWei = ethers.parseUnits(amountIn, 18);
-      const amountOutMin = ethers.parseUnits(amountOut, 18).mul(95).div(100); // 5% slippage
+      const amountOutMin = ethers.parseUnits(amountOut, 18).mul(95).div(100);
       const path = [tokenIn, tokenOut];
       const deadline = Math.floor(Date.now() / 1000) + 60 * 20;
 
